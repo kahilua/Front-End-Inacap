@@ -11,23 +11,23 @@
    1. DATOS / ENTIDADES DEL SISTEMA
    ============================================================ */
 
-/** @typedef {{ id: number, nombre: string, precio: number, categoria: string, descripcion: string, emoji: string }} Producto */
+/** @typedef {{ id: number, nombre: string, precio: number, categoria: string, descripcion: string, imagen: string }} Producto */
 
 const categorias = {
   cuchillos: [
-    { id: 1,  nombre: "Cuchillo Santoku",       precio: 49990, categoria: "cuchillos", descripcion: "Hoja de acero japonés 18 cm, ideal para cortes precisos de verduras y proteínas.", emoji: "🔪" },
-    { id: 2,  nombre: "Cuchillo de Chef 20cm",  precio: 64990, categoria: "cuchillos", descripcion: "Acero inoxidable forjado, mango ergonómico de madera de pakka.", emoji: "🍴" },
-    { id: 3,  nombre: "Cuchillo de Pan",        precio: 29990, categoria: "cuchillos", descripcion: "Hoja serrada de 22 cm, corte limpio sin aplastes.", emoji: "🥖" },
+    { id: 1,  nombre: "Cuchillo Santoku",       precio: 49990, categoria: "cuchillos", descripcion: "Hoja de acero japonés 18 cm, ideal para cortes precisos de verduras y proteínas.", imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/180mm_santoku_%28top-down_view%29.jpg/960px-180mm_santoku_%28top-down_view%29.jpg" },
+    { id: 2,  nombre: "Cuchillo de Chef 20cm",  precio: 64990, categoria: "cuchillos", descripcion: "Acero inoxidable forjado, mango ergonómico de madera de pakka.", imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Chef%27s_knife.jpg/960px-Chef%27s_knife.jpg" },
+    { id: 3,  nombre: "Cuchillo de Pan",        precio: 29990, categoria: "cuchillos", descripcion: "Hoja serrada de 22 cm, corte limpio sin aplastes.", imagen: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Broodmes.jpg" },
   ],
   ollas: [
-    { id: 4,  nombre: "Olla Le Fonte 24 cm",    precio: 119990, categoria: "ollas", descripcion: "Hierro fundido esmaltado, distribución uniforme del calor. Apta para todos los fuegos.", emoji: "🫕" },
-    { id: 5,  nombre: "Cacerola Antiadherente", precio: 44990,  categoria: "ollas", descripcion: "Revestimiento cerámico libre de PFOA, base de aluminio prensado.", emoji: "🍲" },
-    { id: 6,  nombre: "Wok de Acero Carbono",   precio: 39990,  categoria: "ollas", descripcion: "Seasoning natural, apto para cocina de alta temperatura y fuego abierto.", emoji: "🥘" },
+    { id: 4,  nombre: "Olla Le Fonte 24 cm",    precio: 69990, categoria: "ollas", descripcion: "Hierro fundido esmaltado, distribución uniforme del calor. Apta para todos los fuegos.", imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Lamb-stew.jpg/960px-Lamb-stew.jpg" },
+    { id: 5,  nombre: "Cacerola Antiadherente", precio: 44990,  categoria: "ollas", descripcion: "Revestimiento cerámico libre de PFOA, base de aluminio prensado.", imagen: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Pfanne_%28Edelstahl%29.jpg" },
+    { id: 6,  nombre: "Wok de Acero Carbono",   precio: 39990,  categoria: "ollas", descripcion: "Seasoning natural, apto para cocina de alta temperatura y fuego abierto.", imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Wok_cooking.jpg/960px-Wok_cooking.jpg" },
   ],
   accesorios: [
-    { id: 7,  nombre: "Tabla de Corte Bambú",   precio: 19990, categoria: "accesorios", descripcion: "Bambú orgánico extra grueso (3 cm), con ranura colectora de jugos.", emoji: "🪵" },
-    { id: 8,  nombre: "Set Espátulas Silicona",  precio: 12990, categoria: "accesorios", descripcion: "Pack de 3 piezas resistentes a 230°C, sin BPA.", emoji: "🥄" },
-    { id: 9,  nombre: "Termómetro Digital",      precio: 9990,  categoria: "accesorios", descripcion: "Lectura en 2 segundos, rango -50°C a 300°C. Ideal para carnes y repostería.", emoji: "🌡️" },
+    { id: 7,  nombre: "Tabla de Corte Bambú",   precio: 19990, categoria: "accesorios", descripcion: "Bambú orgánico extra grueso (3 cm), con ranura colectora de jugos.", imagen: "https://www.ikea.com/cl/es/images/products/laemplig-tabla-para-picar-bambu__0711757_pe728449_s5.jpg?f=m" },
+    { id: 8,  nombre: "Set Espátulas Silicona",  precio: 3990, categoria: "accesorios", descripcion: "Pack de 3 piezas resistentes a 230°C, sin BPA.", imagen: "https://m.media-amazon.com/images/I/61n6rRPOIAL._AC_SL1500_.jpg" },
+    { id: 9,  nombre: "Termómetro Digital",      precio: 9990,  categoria: "accesorios", descripcion: "Lectura en 2 segundos, rango -50°C a 300°C. Ideal para carnes y repostería.", imagen: "https://m.media-amazon.com/images/I/81VHvUqgC1L._AC_SL1500_.jpg" },
   ],
 };
 
@@ -163,7 +163,9 @@ const Catalogo = (() => {
   const construirTarjeta = (producto) => `
     <article class="product-card" data-id="${producto.id}" tabindex="0"
       aria-label="${escapeHTML(producto.nombre)}, ${formatearPrecio(producto.precio)}">
-      <div class="product-card__emoji" aria-hidden="true">${escapeHTML(producto.emoji)}</div>
+      <div class="product-card__image-container">
+        <img src="${producto.imagen}" alt="${escapeHTML(producto.nombre)}" class="product-card__img" loading="lazy">
+      </div>
       <div class="product-card__body">
         <span class="product-card__cat">${escapeHTML(producto.categoria)}</span>
         <h3 class="product-card__name">${escapeHTML(producto.nombre)}</h3>
@@ -237,12 +239,12 @@ const Carrito = (() => {
 
   /**
    * Construye el HTML de un ítem del carrito.
-   * @param {{ id:number, nombre:string, precio:number, cantidad:number, emoji:string }} item
+   * @param {{ id:number, nombre:string, precio:number, cantidad:number, imagen:string }} item
    * @returns {string}
    */
   const construirItem = (item) => `
     <li class="cart-item" data-id="${item.id}">
-      <span class="cart-item__emoji" aria-hidden="true">${escapeHTML(item.emoji)}</span>
+      <img src="${item.imagen}" alt="" class="cart-item__img" aria-hidden="true">
       <div class="cart-item__info">
         <span class="cart-item__name">${escapeHTML(item.nombre)}</span>
         <span class="cart-item__price">${formatearPrecio(item.precio)} × ${item.cantidad}</span>
@@ -276,7 +278,7 @@ const Carrito = (() => {
       carrito.push({ ...producto, cantidad: 1 });
     }
     renderizar();
-    Toast.mostrar(`"${producto.nombre}" añadido al carrito 🛒`, "success");
+    Toast.mostrar(`"${producto.nombre}" añadido al carrito`, "success");
   };
 
   /**
@@ -312,7 +314,11 @@ const Tema = (() => {
   const aplicar = (tema) => {
     document.body.setAttribute("data-theme", tema);
     const icon = document.getElementById("themeIcon");
-    if (icon) icon.textContent = tema === "dark" ? "🌙" : "☀️";
+    if (icon) {
+      icon.innerHTML = tema === "dark" 
+        ? `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`
+        : `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+    }
     try { localStorage.setItem(KEY, tema); } catch (_) { /* sin acceso a storage */ }
   };
 
@@ -426,7 +432,9 @@ const Modal = (() => {
     if (!overlay || !body) return;
 
     body.innerHTML = `
-      <div class="modal__emoji" aria-hidden="true">${escapeHTML(producto.emoji)}</div>
+      <div class="modal__image-container">
+        <img src="${producto.imagen}" alt="${escapeHTML(producto.nombre)}" class="modal__img">
+      </div>
       <span class="product-card__cat">${escapeHTML(producto.categoria)}</span>
       <h2 class="modal__title" id="modalTitle">${escapeHTML(producto.nombre)}</h2>
       <p class="modal__desc">${escapeHTML(producto.descripcion)}</p>
@@ -591,10 +599,10 @@ const manejarAgregarProducto = () => {
   const precio    = Number(document.getElementById("prodPrecio").value);
   const categoria = document.getElementById("prodCategoria").value;
   const desc      = escapeHTML(document.getElementById("prodDesc").value.trim());
-  const emoji     = document.getElementById("prodEmoji").value.trim() || "🍽️";
+  const imagen    = document.getElementById("prodImagen").value.trim() || "https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=600&auto=format&fit=crop";
 
   /** @type {Producto} */
-  const nuevoProducto = { id: nextId++, nombre, precio, categoria, descripcion: desc, emoji };
+  const nuevoProducto = { id: nextId++, nombre, precio, categoria, descripcion: desc, imagen };
 
   Catalogo.agregarProducto(nuevoProducto);
   Toast.mostrar(`Producto "${nombre}" agregado con éxito. ✓`, "success");

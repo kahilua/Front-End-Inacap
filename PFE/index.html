@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
   <title>Fogón & Arte — Tienda de Cocina</title>
   <link rel="stylesheet" href="styles.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 </head>
-<body data-theme="light">
 
+<body data-theme="light">
   <!-- ===== HEADER ===== -->
+   
   <header class="header" id="header">
     <div class="header__inner">
       <div class="header__logo">
-        <span class="logo-icon">🔥</span>
+        <img src="https://images.unsplash.com/photo-1543362906-acfc16c67564?q=80&w=64&auto=format&fit=crop" alt="" class="logo-img">
         <span class="logo-text">Fogón <em>&amp;</em> Arte</span>
       </div>
       <nav class="header__nav" id="mainNav" aria-label="Navegación principal">
@@ -24,10 +24,14 @@
       </nav>
       <div class="header__actions">
         <button class="btn-icon" id="themeToggle" aria-label="Alternar tema" title="Cambiar tema">
-          <span class="theme-icon" id="themeIcon">☀️</span>
+          <span class="theme-icon" id="themeIcon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </span>
         </button>
         <button class="btn-cart" id="cartBtn" aria-label="Abrir carrito">
-          <span class="cart-icon">🛒</span>
+          <span class="cart-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          </span>
           <span class="cart-badge" id="cartBadge">0</span>
         </button>
       </div>
@@ -104,8 +108,8 @@
         </div>
 
         <div class="field-group">
-          <label for="prodEmoji">Ícono (emoji)</label>
-          <input type="text" id="prodEmoji" name="prodEmoji" placeholder="🍳" maxlength="4"/>
+          <label for="prodImagen">URL de la imagen (opcional)</label>
+          <input type="url" id="prodImagen" name="prodImagen" placeholder="https://ejemplo.com/foto.jpg"/>
         </div>
 
         <button class="btn-primary btn-full" id="addProductBtn" type="button">Agregar producto</button>
@@ -182,7 +186,7 @@
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <p>© 2026 Fogón &amp; Arte — Todos los derechos reservados.</p>
-    <p class="footer__sub">Hecho con 🔥 en Santiago, Chile</p>
+    <p class="footer__sub">Hecho con pasión en Santiago, Chile</p>
   </footer>
 
   <script src="index.js"></script>
