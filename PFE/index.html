@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
+  <title>Fogón & Arte — Tienda de Cocina</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body data-theme="light">
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <div class="header__logo">
+        <span class="logo-icon">🔥</span>
+        <span class="logo-text">Fogón <em>&amp;</em> Arte</span>
+      </div>
+      <nav class="header__nav" id="mainNav" aria-label="Navegación principal">
+        <a href="#productos" class="nav-link">Productos</a>
+        <a href="#agregar" class="nav-link">Agregar</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+      </nav>
+      <div class="header__actions">
+        <button class="btn-icon" id="themeToggle" aria-label="Alternar tema" title="Cambiar tema">
+          <span class="theme-icon" id="themeIcon">☀️</span>
+        </button>
+        <button class="btn-cart" id="cartBtn" aria-label="Abrir carrito">
+          <span class="cart-icon">🛒</span>
+          <span class="cart-badge" id="cartBadge">0</span>
+        </button>
+      </div>
+    </div>
+    <!-- Notificación global -->
+    <div class="toast" id="toast" role="alert" aria-live="polite"></div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero__content">
+      <p class="hero__tag">Cocina de autor</p>
+      <h1 class="hero__title">Herramientas que<br/><em>inspiran</em> crear</h1>
+      <p class="hero__sub">Utensilios y equipos para quienes entienden la cocina como arte.</p>
+      <a href="#productos" class="btn-primary">Explorar colección</a>
+    </div>
+    <div class="hero__visual">
+      <div class="hero__orb"></div>
+      <div class="hero__orb hero__orb--2"></div>
+    </div>
+  </section>
+
+  <!-- ===== PRODUCTOS ===== -->
+  <main class="main" id="productos">
+    <div class="section-header">
+      <h2 class="section-title">Nuestra colección</h2>
+      <div class="filter-bar" role="group" aria-label="Filtrar por categoría">
+        <button class="filter-btn active" data-filter="todos">Todos</button>
+        <button class="filter-btn" data-filter="cuchillos">Cuchillos</button>
+        <button class="filter-btn" data-filter="ollas">Ollas</button>
+        <button class="filter-btn" data-filter="accesorios">Accesorios</button>
+      </div>
+    </div>
+
+    <div class="products-grid" id="productsGrid" aria-label="Catálogo de productos">
+      <!-- Tarjetas generadas por JS -->
+    </div>
+  </main>
+
+  <!-- ===== AGREGAR PRODUCTO ===== -->
+  <section class="form-section" id="agregar">
+    <div class="form-card">
+      <h2 class="form-card__title">Agregar nuevo producto</h2>
+      <div class="form-body" id="addProductForm" novalidate>
+
+        <div class="field-group">
+          <label for="prodNombre">Nombre del producto <span class="required">*</span></label>
+          <input type="text" id="prodNombre" name="prodNombre" placeholder="Ej: Wok de acero carbono" maxlength="80" autocomplete="off"/>
+          <span class="field-error" id="err-prodNombre"></span>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="prodPrecio">Precio (CLP) <span class="required">*</span></label>
+            <input type="number" id="prodPrecio" name="prodPrecio" placeholder="29990" min="1"/>
+            <span class="field-error" id="err-prodPrecio"></span>
+          </div>
+          <div class="field-group">
+            <label for="prodCategoria">Categoría <span class="required">*</span></label>
+            <select id="prodCategoria" name="prodCategoria">
+              <option value="">— Seleccionar —</option>
+              <option value="cuchillos">Cuchillos</option>
+              <option value="ollas">Ollas</option>
+              <option value="accesorios">Accesorios</option>
+            </select>
+            <span class="field-error" id="err-prodCategoria"></span>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="prodDesc">Descripción <span class="required">*</span></label>
+          <textarea id="prodDesc" name="prodDesc" rows="3" placeholder="Breve descripción del producto..." maxlength="200"></textarea>
+          <span class="field-error" id="err-prodDesc"></span>
+        </div>
+
+        <div class="field-group">
+          <label for="prodEmoji">Ícono (emoji)</label>
+          <input type="text" id="prodEmoji" name="prodEmoji" placeholder="🍳" maxlength="4"/>
+        </div>
+
+        <button class="btn-primary btn-full" id="addProductBtn" type="button">Agregar producto</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACTO / REGISTRO ===== -->
+  <section class="form-section form-section--alt" id="contacto">
+    <div class="form-card">
+      <h2 class="form-card__title">Crear cuenta</h2>
+      <div class="form-body" id="registerForm" novalidate>
+
+        <div class="field-group">
+          <label for="regNombre">Nombre completo <span class="required">*</span></label>
+          <input type="text" id="regNombre" name="regNombre" placeholder="Ana Pérez" autocomplete="name"/>
+          <span class="field-error" id="err-regNombre"></span>
+        </div>
+
+        <div class="field-group">
+          <label for="regEmail">Correo electrónico <span class="required">*</span></label>
+          <input type="email" id="regEmail" name="regEmail" placeholder="ana@ejemplo.com" autocomplete="email"/>
+          <span class="field-error" id="err-regEmail"></span>
+        </div>
+
+        <div class="field-group">
+          <label for="regPassword">Contraseña <span class="required">*</span></label>
+          <div class="input-with-toggle">
+            <input type="password" id="regPassword" name="regPassword" placeholder="Mínimo 8 caracteres" autocomplete="new-password"/>
+            <button type="button" class="btn-eye" id="togglePassword" aria-label="Mostrar contraseña">👁</button>
+          </div>
+          <div class="password-strength" id="passwordStrength" aria-live="polite"></div>
+          <span class="field-error" id="err-regPassword"></span>
+        </div>
+
+        <div class="field-group">
+          <label for="regPasswordConfirm">Confirmar contraseña <span class="required">*</span></label>
+          <input type="password" id="regPasswordConfirm" name="regPasswordConfirm" placeholder="Repite tu contraseña" autocomplete="new-password"/>
+          <span class="field-error" id="err-regPasswordConfirm"></span>
+        </div>
+
+        <button class="btn-primary btn-full" id="registerBtn" type="button">Registrarse</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CARRITO LATERAL ===== -->
+  <div class="cart-overlay" id="cartOverlay" aria-hidden="true"></div>
+  <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-label="Carrito de compras" aria-hidden="true">
+    <div class="cart-drawer__header">
+      <h2 class="cart-drawer__title">Tu carrito</h2>
+      <button class="btn-icon" id="closeCart" aria-label="Cerrar carrito">✕</button>
+    </div>
+    <ul class="cart-list" id="cartList" aria-label="Artículos en el carrito">
+      <!-- Items generados por JS -->
+    </ul>
+    <div class="cart-drawer__footer">
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cartTotal">$0</span>
+      </div>
+      <button class="btn-primary btn-full" id="checkoutBtn">Ir al pago</button>
+    </div>
+  </aside>
+
+  <!-- ===== MODAL DETALLE ===== -->
+  <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+    <div class="modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="btn-icon modal__close" id="closeModal" aria-label="Cerrar">✕</button>
+      <div class="modal__body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <p>© 2026 Fogón &amp; Arte — Todos los derechos reservados.</p>
+    <p class="footer__sub">Hecho con 🔥 en Santiago, Chile</p>
+  </footer>
+
+  <script src="index.js"></script>
+</body>
+</html>
