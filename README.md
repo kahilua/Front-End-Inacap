@@ -22,6 +22,6 @@ Este proyecto es una demostración de una página web desarrollada para la **seg
 
 ## Reflexión de los prompts
 - Al tener un recurso tan potente como es la IA nos sirve para validar que lo que hemos trabajado cumpla con los estandares de optimización y seguridad
-  que hemos trabajado, logrando así obtener un producto final limpio y eficiente para presentar a posibles clientes.
+  actuales, logrando así obtener un producto final limpio y eficiente para presentar a posibles clientes.
 ---
 *Desarrollado como parte de la evaluación para el curso de Front End - Inacap.* 
